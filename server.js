@@ -22,7 +22,12 @@ const db = mysql.createConnection (
     console.log('connected to the election database.')
 );
 
-// Deafault response for any other Requests (not found)
+
+db.query(`Select * FROM candidates` , (err, rows) => {
+    console.log(rows);
+});
+
+// Deafault response for any other Requests (not found) catch all 
 //make sure this is the last route as it overrides the others 
 app.use((req, res) => {
     res.status(404).end();
