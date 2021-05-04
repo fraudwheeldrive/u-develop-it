@@ -1,3 +1,5 @@
+const mysql = require('mysql2');
+
 const express = require('express');
 
 const PORT = process.env.PORT || 3001;
@@ -7,12 +9,18 @@ const app = express ();
 app.use (express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// get route 
-app.get ('/' , (req, res) => {
-    res.json({
-        message: ' Hello World'
-    });
-});
+// connect to mysql database
+const db = mysql.createConnection (
+    {
+        host: 'localhost',
+        //your MYSQL username,
+        user: 'root',
+        // your mysql password
+        password: 'Raptor10!',
+        database: 'election'
+    },
+    console.log('connected to the election database.')
+);
 
 // Deafault response for any other Requests (not found)
 //make sure this is the last route as it overrides the others 
